@@ -163,7 +163,7 @@ class CommentJSONEncoder(json.JSONEncoder):
         else:
             return json.JSONEncoder.default(self, o)
 
-def format_to_html(req, env, text):
-    req = Mock(href=Href('/'), abs_href=Href('http://www.example.com/'), authname='anonymous', perm=MockPerm(), args={})
+def format_to_html(req_in, env, text):
+    req = req_in or Mock(href=Href('/'), abs_href=Href('http://www.example.com/'), authname='anonymous', perm=MockPerm(), args={})
     context = Context.from_request(req)
     return trac.wiki.formatter.format_to_html(env, context, text)
